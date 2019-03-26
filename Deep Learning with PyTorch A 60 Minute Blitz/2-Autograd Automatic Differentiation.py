@@ -26,9 +26,26 @@ print(b.grad_fn)
 
 # Let’s backprop now. Because out contains a single scalar, out.backward() is equivalent to out.backward(torch.tensor(1.)).
 out.backward()
-print(x.grad)
+print("y is no longer a scalar",  x.grad)
+
 
 #vector-Jacobian
-X = torch.randn(3,requires_grad = True)
+x = torch.randn(3,requires_grad = True)
+y = x*2
+while y.data.norm() < 1000:
+  y = y*2
+print(y)
+# note autograd model can only works on the output is a scalar(it aim to BP method whose result is a scalar)
+# https://www.jianshu.com/p/cbce2dd60120
+# Now in this case y is no longer a scalar. /
+# torch.autograd could not compute the full Jacobian directly, /
+#  but if we just want the vector-Jacobian product, simply pass the vector to backward as argument:
+v = torch.tensor([0.1,1.0,0.0001],dtype = torch.float )
+y.backward(v)
+print(x.grad)
 
-#https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html
+print(x.requires_grad)
+print((x**2).requires_grad)
+
+with torch.no_grad():
+  print((x**2).requires_grad)
