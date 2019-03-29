@@ -1,2 +1,5 @@
 /Deep Learning with PyTorch A 60 Minute Blitz/data/
 **/data/
+*.rar
+*.gz
+*.zip
