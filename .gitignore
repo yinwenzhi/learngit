@@ -3,3 +3,5 @@
 *.rar
 *.gz
 *.zip
+*.pth
+*.pyc

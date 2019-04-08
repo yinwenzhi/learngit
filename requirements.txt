@@ -1,0 +1,6 @@
+git+https://github.com/pytorch/tnt.git@master
+fire
+numpy
+torchvision
+visdom
+torchnet #我自己添加的
